@@ -1,6 +1,6 @@
 {
   "name": "monorepo-v3",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha",
   "description": "Monorepo for Cryptex Finance v3",
   "main": "index.js",
   "scripts": {
