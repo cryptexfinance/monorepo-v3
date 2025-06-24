@@ -1,0 +1,9 @@
+{
+  "name": "contracts",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "forge test",
+    "build": "forge build",
+    "deploy": "forge script"
+  }
+}
