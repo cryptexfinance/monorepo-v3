@@ -25,13 +25,14 @@ jobs:
           node-version: "20.18.2"
           cache: "pnpm"
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9.9.0
-
       - name: Install dependencies
         run: pnpm install
+
+      - name: Install Foundry via foundryup (v1.2.3)
+        run: |
+          curl -L https://foundry.paradigm.xyz | bash
+          export PATH="$HOME/.foundry/bin:$PATH"
+          $HOME/.foundry/bin/foundryup --version v1.2.3
 
       - name: Run build
         run: pnpm build
