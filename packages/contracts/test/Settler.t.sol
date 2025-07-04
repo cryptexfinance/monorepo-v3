@@ -13,6 +13,7 @@ import { ISettler } from "../src/interfaces/ISettler.sol";
 contract SettlerTest is Test {
   Settler public settler;
   address public ADMIN = address(0x01);
+
   address public GUARDIAN = address(0x02);
   address public INSTITUTION = address(0x03);
   address public INSTITUTION_2 = address(0x04);
@@ -33,8 +34,8 @@ contract SettlerTest is Test {
     TOKEN_PRICE_ORACLE = new MockPriceOracle();
     PROOF_OF_RESERVES_ORACLE = new MockReservesOracle();
 
-    // Create CRYPTO40 first with a temporary settler address
-    CRYPTO40 = new Crypto40(address(0), ADMIN);
+    // Create CRYPTO40 with the correct owner address
+    CRYPTO40 = new Crypto40(ADMIN, ADMIN);
 
     settler = new Settler(
       ADMIN,
@@ -50,6 +51,8 @@ contract SettlerTest is Test {
     // Set the price oracle to return 250 USD (250 * 1e8 = 25000000000)
     // This means 1 CRYPTO40 = 250 USD
     TOKEN_PRICE_ORACLE.setPrice(25000000000);
+    vm.prank(ADMIN);
+    CRYPTO40.transferOwnership(address(settler));
   }
 
   // Test: should deploy with the correct parameters
